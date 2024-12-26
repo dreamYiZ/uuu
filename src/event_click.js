@@ -3,13 +3,13 @@
 function setupClickEvent(callback, limit) {
     let timer = null;
 
-    return function(event) {
+    return function (event) {
         if (timer) {
             return;
         }
 
         callback(event);
-        
+
         timer = setTimeout(() => {
             timer = null;
         }, limit);
@@ -23,3 +23,6 @@ function setupClickEvent(callback, limit) {
 // };
 
 // button.addEventListener('click', setupClickEvent(handleClick, 1000)); // 设置 1000 毫秒的限制
+
+
+export { setupClickEvent }
