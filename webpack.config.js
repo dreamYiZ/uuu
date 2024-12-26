@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js', // 入口文件，可以是src文件夹中的任意文件
@@ -19,5 +20,12 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, 'dist/bundle.js'), to: path.resolve(__dirname, 'html/bundle.js') }
+            ]
+        })
+    ]
 };
