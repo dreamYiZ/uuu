@@ -27,5 +27,15 @@ module.exports = {
                 { from: path.resolve(__dirname, 'dist/bundle.js'), to: path.resolve(__dirname, 'html/bundle.js') }
             ]
         })
-    ]
+    ],
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, 'html'), // 提供内容的文件夹
+        },
+        watchFiles: ['src/**/*'], // 监听文件变化
+        compress: true, // 启用 gzip 压缩
+        port: 9000, // 开发服务器的端口
+        hot: true, // 启用模块热替换
+        open: true // 自动打开浏览器
+    }
 };
