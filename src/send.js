@@ -1,8 +1,8 @@
 // send.js
 
-async function sendJSON(url, data) {
+export async function sendJSON({ serverUrl , data }) {
     try {
-        const response = await fetch(url, {
+        const response = await fetch(serverUrl, {
             method: 'POST', // 使用 POST 方法
             headers: {
                 'Content-Type': 'application/json' // 设置请求头

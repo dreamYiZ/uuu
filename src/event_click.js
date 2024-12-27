@@ -1,28 +1,28 @@
 // event_click.js
+import { uuu_className } from "./constant";
+import domDocument from "./document";
 
 function setupClickEvent(callback, limit) {
     let timer = null;
 
-    return function (event) {
-        if (timer) {
-            return;
+    domDocument.addEventListener('click', function (event) {
+        if (event.target.classList.contains(uuu_className)) {
+            if (timer) {
+                return;
+            }
+
+            const data = event.target.getAttribute('data-uuu'); // 获取 data-uuu 属性值
+
+            callback({
+                text: data,
+                timestamp: +new Date(),
+            }); // 传递 data-uuu 值到回调函数
+
+            timer = setTimeout(() => {
+                timer = null;
+            }, limit);
         }
-
-        callback(event);
-
-        timer = setTimeout(() => {
-            timer = null;
-        }, limit);
-    };
+    });
 }
-
-// // 示例使用
-// const button = document.getElementById('yourButtonId'); // 将 'yourButtonId' 替换为实际按钮的ID
-// const handleClick = (event) => {
-//     console.log('Button clicked:', event);
-// };
-
-// button.addEventListener('click', setupClickEvent(handleClick, 1000)); // 设置 1000 毫秒的限制
-
 
 export { setupClickEvent }
