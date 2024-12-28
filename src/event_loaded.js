@@ -4,7 +4,6 @@ import domDocument from "./document";
 
 function setupLoadedEvent(callback, limit) {
     const observer = new MutationObserver((mutations) => {
-        console.log('MutationObserver', MutationObserver);
         mutations.forEach((mutation) => {
             if (mutation.type === 'childList') {
                 const elements = domDocument.getElementsByClassName(uuu_loaded_className);
@@ -13,9 +12,9 @@ function setupLoadedEvent(callback, limit) {
                     if (element.classList.contains(uuu_loaded_triggered_className)) {
                         return;
                     }
-                    
+
                     const data = element.getAttribute('data-uuu_loaded'); // 获取 data-uuu_loaded 属性值
-                    
+
                     // 传递 data-uuu_loaded 值到回调函数
                     callback({
                         text: data,
@@ -42,9 +41,9 @@ function setupLoadedEvent(callback, limit) {
         if (element.classList.contains(uuu_loaded_triggered_className)) {
             return;
         }
-        
+
         const data = element.getAttribute('data-uuu_loaded'); // 获取 data-uuu_loaded 属性值
-        
+
         // 传递 data-uuu_loaded 值到回调函数
         callback({
             text: data,
@@ -54,6 +53,9 @@ function setupLoadedEvent(callback, limit) {
         // 设置触发标记
         element.classList.add(uuu_loaded_triggered_className);
     });
+
+    // 返回断开观察器的方法
+    return () => observer.disconnect();
 }
 
 export { setupLoadedEvent }

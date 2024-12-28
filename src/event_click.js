@@ -5,7 +5,7 @@ import domDocument from "./document";
 function setupClickEvent(callback, limit) {
     let timer = null;
 
-    domDocument.addEventListener('click', function (event) {
+    const clickHandler = function (event) {
         if (event.target.classList.contains(uuu_className)) {
             if (timer) {
                 return;
@@ -22,7 +22,12 @@ function setupClickEvent(callback, limit) {
                 timer = null;
             }, limit);
         }
-    });
+    };
+
+    domDocument.addEventListener('click', clickHandler);
+
+    // 返回移除事件监听的方法
+    return () => domDocument.removeEventListener('click', clickHandler);
 }
 
 export { setupClickEvent }

@@ -1,3 +1,4 @@
+// uuu.js
 import { serverUrl } from "./server_url";
 import { sendJSON } from "./send";
 import { limit } from "./limit";
@@ -16,9 +17,14 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
             config: {},
             init: function (payload = { serverUrl, limit }) {
                 this.config = { ...this.config, ...payload };
-                setupClickEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
-                setupLoadedEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
+                this.removeClickEvent = setupClickEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
+                this.removeLoadedEvent = setupLoadedEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
                 console.log('uuu init');
+            },
+            destroy: function () {
+                if (this.removeClickEvent) this.removeClickEvent(); // 移除点击事件监听
+                if (this.removeLoadedEvent) this.removeLoadedEvent(); // 移除加载事件监听
+                console.log('uuu destroyed');
             },
             eventCallback: function (data) {
                 console.log('eventCallback triggered with data:', data);

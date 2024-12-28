@@ -10,6 +10,7 @@
     <div id="btn-group-1">
       <button id="btn1" class="uuu" data-uuu="按钮1被点击了！">按钮1</button>
       <button class="uuu_loaded" data-uuu_loaded="按钮2被加载了！">按钮2</button>
+      <button id="btn5" class="uuu" data-uuu="按钮5被点击了！">按钮5</button>
     </div>
     <!-- 引入 bundle.js 文件 -->
     <script src="bundle.js"></script>
@@ -24,6 +25,15 @@
         newButton.className = 'uuu_loaded';
         newButton.setAttribute('data-uuu_loaded', '按钮3被加载了！');
         newButton.textContent = '按钮3';
+        btnGroup.appendChild(newButton);
+      });
+      
+      document.getElementById('btn5').addEventListener('click', function() {
+        const btnGroup = document.getElementById('btn-group-1');
+        const newButton = document.createElement('button');
+        newButton.className = 'uuu';
+        newButton.setAttribute('data-uuu', '按钮6被点击了！');
+        newButton.textContent = '按钮6';
         btnGroup.appendChild(newButton);
       });
     </script>
