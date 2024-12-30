@@ -18,8 +18,9 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
             ENABLE_LIST,
             config: {
                 enabled: ENABLE_LIST,
+                console: false,
             },
-            init: function (payload = { serverUrl, limit, enabled }) {
+            init: function (payload = { serverUrl, limit, enabled, console }) {
                 this.config = { ...this.config, ...payload };
 
                 if (this.config.enabled.includes('click')) {
@@ -28,20 +29,25 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
                 if (this.config.enabled.includes('loaded')) {
                     this.removeLoadedEvent = setupLoadedEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
                 }
-                console.log('uuu init');
+                this.consoleLog('uuu init');
             },
             destroy: function () {
                 if (this.removeClickEvent) this.removeClickEvent(); // 移除点击事件监听
                 if (this.removeLoadedEvent) this.removeLoadedEvent(); // 移除加载事件监听
-                console.log('uuu destroyed');
+                this.consoleLog('uuu destroyed');
             },
             eventCallback: function (data) {
-                console.log('eventCallback triggered with data:', data);
+                this.consoleLog('eventCallback triggered with data:', data);
                 sendJSON({
                     serverUrl: this.config.serverUrl,
                     data,
                 });
-            }
+            },
+            consoleLog: function (msg, ...otherArgs) {
+                if (this.config.console) {
+                    console.log(msg, ...otherArgs);
+                }
+            },
         };
         window['uuu'] = uuu;
     }
