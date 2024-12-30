@@ -5,6 +5,7 @@ import { limit } from "./limit";
 import { setupClickEvent } from "./event_click";
 import { setupLoadedEvent } from "./event_loaded";
 import domDocument from "./document";
+import { ENABLE_LIST } from "./constant";
 
 if (!domDocument || Object.keys(domDocument).length === 0) {
     console.error('document not found');
@@ -14,11 +15,19 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
         // window['uuu'] 已存在，可能已经初始化过
     } else {
         const uuu = {
-            config: {},
-            init: function (payload = { serverUrl, limit }) {
+            ENABLE_LIST,
+            config: {
+                enabled: ENABLE_LIST,
+            },
+            init: function (payload = { serverUrl, limit, enabled }) {
                 this.config = { ...this.config, ...payload };
-                this.removeClickEvent = setupClickEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
-                this.removeLoadedEvent = setupLoadedEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
+
+                if (this.config.enabled.includes('click')) {
+                    this.removeClickEvent = setupClickEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
+                }
+                if (this.config.enabled.includes('loaded')) {
+                    this.removeLoadedEvent = setupLoadedEvent(this.eventCallback.bind(this), this.config.limit); // 确保 this 指向 uuu
+                }
                 console.log('uuu init');
             },
             destroy: function () {
