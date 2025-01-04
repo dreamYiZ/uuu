@@ -20,7 +20,7 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
                 enabled: ENABLE_LIST,
                 console: false,
             },
-            init: function (payload = { serverUrl, limit, enabled, console }) {
+            init: function (payload = { serverUrl, limit, enabled, console, userid, }) {
                 this.config = { ...this.config, ...payload };
 
                 if (this.config.enabled.includes('click')) {
@@ -40,7 +40,10 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
                 this.consoleLog('eventCallback triggered with data:', data);
                 sendJSON({
                     serverUrl: this.config.serverUrl,
-                    data,
+                    data: {
+                        ...data,
+                        userid: this.config.userid, 
+                    },
                 });
             },
             consoleLog: function (msg, ...otherArgs) {

@@ -18,8 +18,9 @@
     <script src="bundle.js"></script>
     <script>
       console.log("uuu is:", uuu);
-      // uuu.init({ serverUrl: "http://localhost:3000/uuu", console: true });
-      uuu.init({ serverUrl: "http://localhost:3000/uuu"});
+      
+      uuu.init({ serverUrl: "http://localhost:3000/uuu", userid: "0001", console: true });
+      // uuu.init({ serverUrl: "http://localhost:3000/uuu", userid: "0001", console: false });
 
       // 添加点击事件，当按钮1被点击时，在btn-group-1中添加按钮3
       document.getElementById("btn1").addEventListener("click", function () {
