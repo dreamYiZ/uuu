@@ -1,4 +1,6 @@
 {
+  "name": "uuumpkg",
+  "version": "0.0.11",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --mode development"
