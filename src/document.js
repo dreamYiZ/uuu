@@ -1,5 +1,5 @@
 // 检查是否在浏览器环境中
-if (window && typeof window !== 'undefined') {
+if (typeof window !== 'undefined') {
     if (typeof document !== 'undefined') {
         // 导出 document
         module.exports = document;
