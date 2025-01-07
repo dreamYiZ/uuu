@@ -55,3 +55,6 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
         window['uuu'] = uuu;
     }
 }
+
+
+export {uuu}
