@@ -40,3 +40,10 @@ createApp(App).mount('#app')
 
 ```
 
+
+## example vue project 
+
+https://github.com/dreamYiZ/uuu-vue-test
+
+
+## Thank You
