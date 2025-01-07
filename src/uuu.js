@@ -56,5 +56,14 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
     }
 }
 
-const uuu = window['uuu'];
+const uuuPlaceHolder = {
+    init: function (){
+        console.log('uuuPlaceHolder init');
+    },
+    destroy: function(){
+        console.log('uuuPlaceHolder destroy');
+    }
+}
+
+const uuu = window ? window['uuu'] : uuuPlaceHolder;
 export { uuu };
