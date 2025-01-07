@@ -7,8 +7,22 @@ import { setupLoadedEvent } from "./event_loaded";
 import domDocument from "./document";
 import { ENABLE_LIST } from "./constant";
 
+let globalUUU;
+
+
+const uuuPlaceHolder = {
+    init: function () {
+        console.log('uuuPlaceHolder init');
+    },
+    destroy: function () {
+        console.log('uuuPlaceHolder destroy');
+    }
+}
+
+
 if (!domDocument || Object.keys(domDocument).length === 0) {
     console.error('document not found');
+    globalUUU = uuuPlaceHolder;
 } else {
     console.log('uuu load');
     if (window['uuu']) {
@@ -53,17 +67,11 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
             },
         };
         window['uuu'] = uuu;
+        globalUUU = uuu;
     }
 }
 
-const uuuPlaceHolder = {
-    init: function (){
-        console.log('uuuPlaceHolder init');
-    },
-    destroy: function(){
-        console.log('uuuPlaceHolder destroy');
-    }
-}
 
-const uuu = window ? window['uuu'] : uuuPlaceHolder;
-export { uuu };
+
+
+export { globalUUU as uuu };
