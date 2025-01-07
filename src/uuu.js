@@ -42,7 +42,7 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
                     serverUrl: this.config.serverUrl,
                     data: {
                         ...data,
-                        userid: this.config.userid, 
+                        userid: this.config.userid,
                     },
                 });
             },
@@ -56,5 +56,5 @@ if (!domDocument || Object.keys(domDocument).length === 0) {
     }
 }
 
-
-export {uuu}
+const uuu = window['uuu'];
+export { uuu };

@@ -1,17 +1,20 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const fs = require('fs-extra'); // 使用 fs-extra
 
 module.exports = {
-    entry: './src/index.js', // 入口文件，可以是src文件夹中的任意文件
+    entry: './src/index.js',
     output: {
-        filename: 'bundle.js', // 输出文件名
-        path: path.resolve(__dirname, 'dist') // 输出文件夹
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'uuumpkg.js',
+        library: 'uuumpkg',
+        libraryTarget: 'umd',
+        globalObject: 'this'
     },
     module: {
         rules: [
             {
-                test: /\.js$/, // 匹配所有的 js 文件
-                exclude: /node_modules/, // 排除 node_modules 文件夹
+                test: /\.js$/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -22,20 +25,25 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: path.resolve(__dirname, 'dist/bundle.js'), to: path.resolve(__dirname, 'html/bundle.js') }
-            ]
-        })
+        {
+            apply: (compiler) => {
+                compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+                    fs.copySync(
+                        path.resolve(__dirname, 'dist'),
+                        path.resolve(__dirname, 'html')
+                    );
+                });
+            }
+        }
     ],
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'html'), // 提供内容的文件夹
+            directory: path.resolve(__dirname, 'html'),
         },
-        watchFiles: ['src/**/*'], // 监听文件变化
-        compress: true, // 启用 gzip 压缩
-        port: 9000, // 开发服务器的端口
-        hot: true, // 启用模块热替换
-        open: true // 自动打开浏览器
+        watchFiles: ['src/**/*'],
+        compress: true,
+        port: 9000,
+        hot: true,
+        open: true
     }
 };
