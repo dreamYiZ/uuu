@@ -1,10 +1,11 @@
 {
   "name": "uuumpkg",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --mode development"
   },
+  "main": "src/index.js",
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
@@ -13,5 +14,9 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^4.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreamYiZ/uuu.git"
   }
 }
