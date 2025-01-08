@@ -83,7 +83,7 @@ https://github.com/dreamYiZ/uuu-vue-test
 
 ## example nextjs project 
 
-https://github.com/dreamYiZ/uuu-vue-test
+https://github.com/dreamYiZ/uuu-react-test
 
 
 ## Thank You
